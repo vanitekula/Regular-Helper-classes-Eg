@@ -1,0 +1,64 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using WebApplication27.Models;
+
+namespace WebApplication27.Controllers
+{
+    
+    public class EmployeeController : Controller
+    {
+        Ojasdb ojasdb = new Ojasdb();
+        // GET: Employee
+
+        public ActionResult AddEmployee()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddEmployee(Employee emp)
+        {
+            ojasdb.Employee.Add(emp);
+            if(ojasdb.SaveChanges()==1)
+            {
+                ViewData["res"] = "Employee Added Successfully";
+            }
+            else
+            {
+                ViewData["res"] = "Employee not Added Successfully";
+            }
+            return View();
+        }
+    }
+}
+==============================================================================
+
+
+@model WebApplication27.Models.Employee
+
+@{
+    ViewBag.Title = "AddEmployee";
+}
+
+<h2>AddEmployee</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(Model => Model.Eid)
+    <br />
+    @Html.TextBoxFor(Model => Model.Eid)
+    <br />
+    @Html.LabelFor(Model => Model.Ename)
+    <br />
+    @Html.TextBoxFor(Model => Model.Ename)
+    <br />
+    @Html.LabelFor(Model => Model.Esal)
+    <br />
+    @Html.TextBoxFor(Model => Model.Esal)
+    <br />
+    <input type="submit" value="Register"/>
+    <br />
+    @ViewData["res"]
+}
