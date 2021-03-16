@@ -1,0 +1,72 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Data;
+using System.Data.SqlClient;
+using WebApplication26.Models;
+
+namespace WebApplication26.Controllers
+{
+    public class HomeController : Controller
+    {
+        // GET: Home
+        public ActionResult Index()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Index(Employee emp)
+        {
+            SqlConnection con = new SqlConnection(@"Data Source=OJAS-DD252\SQLEXPRESS;Initial Catalog=EmpDb;Persist Security Info=True;User ID=sa;Password=Ojas@15251525");
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            con.Close();
+            cmd.CommandText = string.Format($"insert into employee values ({emp.EmpId}, '{emp.EmpName}',{emp.EmpSal})");
+            con.Open();
+            int val = cmd.ExecuteNonQuery();
+            con.Close();
+            if(val==1)
+            {
+                ViewData["Res"] = "Record Added";
+            }
+            else
+            {
+                ViewData["Res"] = "Record Failed";
+            }
+            return View();
+        }
+    }
+}
+=========================================================================================
+
+@model WebApplication26.Models.Employee
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@using (Html.BeginForm())
+{
+<table align="center" border="0" , cellpadding="10" , cellspacing="5">
+    <tr>
+    <tr>
+        <td>@Html.LabelFor(Model => Model.EmpId)</td>
+        <td>@Html.TextBoxFor(Model => Model.EmpId)</td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(Model => Model.EmpName)</td>
+        <td>@Html.TextBoxFor(Model => Model.EmpName)</td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(Model => Model.EmpSal)</td>
+        <td>@Html.TextBoxFor(Model => Model.EmpSal)</td>
+    </tr>
+    <tr>
+        <td align="center"><input type="submit" value="Register" /></td>
+        <td>@ViewData["Res"]</td>
+    </tr>
+</table>
+}
