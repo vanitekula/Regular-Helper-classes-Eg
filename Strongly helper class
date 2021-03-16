@@ -1,0 +1,69 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using WebApplication25.Models;
+
+namespace WebApplication25.Controllers
+{
+    public class HomeController : Controller
+    {
+        // GET: Home
+        public ActionResult Index()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Index(Employee emp)
+        {
+            return View();
+        }
+    }
+}
+====================================================
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace WebApplication25.Models
+{
+    public class Employee
+    {
+        public int Eid { get; set; }
+        public string Ename { get; set; }
+        public int Esal { get; set; }
+    }
+}
+==================================================
+
+@model WebApplication25.Models.Employee
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm())
+{
+    <table align="center" border="0" cellspacing="5" cellpadding="10">
+        <tr>
+            <td>@Html.LabelFor(Model => Model.Eid)</td>
+            <td>@Html.TextBoxFor(Model => Model.Eid)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(Model => Model.Ename)</td>
+            <td>@Html.TextBoxFor(Model => Model.Ename)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(Model => Model.Esal)</td>
+            <td>@Html.TextBoxFor(Model => Model.Esal)</td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><input type="submit" value="Register" /></td>
+        </tr>
+    </table>
+}
