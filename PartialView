@@ -1,0 +1,53 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace WebApplication16.Controllers
+{
+    public class HomeController : Controller
+    {
+        // GET: Home
+        public ActionResult Index()
+        {
+            return View();
+        }
+        public PartialViewResult Login()
+        {
+            return PartialView();
+        }
+    }
+}
+==================================================
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@Html.Partial("Login")
+<hr />
+<hr />
+@{ 
+    Html.RenderPartial("Login");
+}
+
+=====================================================
+
+
+<table>
+    <h2>Login Page</h2>
+    <tr>
+        <td>@Html.Label("User Name")</td>
+        <td>@Html.TextBox("uname")</td>
+       
+        <td>@Html.Label("Password")</td>
+        <td>@Html.Password("pwd")</td>
+       
+        <td colspan="2"><input type="submit" value="Login"/></td>
+    </tr>
+</table>
+ 
