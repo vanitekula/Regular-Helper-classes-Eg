@@ -1,0 +1,83 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.ComponentModel.DataAnnotations;
+
+namespace WebApplication30.Models
+{
+    public class Employee
+    {
+        [Required(ErrorMessage ="Employee ID is must")]
+        [Display(Name ="Employee ID")]
+        public int EmpId { get; set; }
+
+        [Required(ErrorMessage ="Employee Name is must")]
+        [Display(Name = "Employee Name")]
+        [MinLength(5, ErrorMessage ="Employee Name must be 5 characters")]
+        [MaxLength(15, ErrorMessage ="Employee Name must be 15 characters")]
+        public string EmpName { get; set; }
+
+        [Required(ErrorMessage ="Employee Salary is must")]
+        [Display(Name = "Employee Salary")]
+        public int EmpSal { get; set; }
+    }
+}
+===========================================================================
+
+@model WebApplication30.Models.Employee
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("true")
+    <br />
+    <br />
+    @Html.LabelFor(Model=> Model.EmpId)
+    @Html.EditorFor(Model=> Model.EmpId)
+    @Html.ValidationMessageFor(Model=> Model.EmpId)
+    <br />
+    <br />
+    @Html.LabelFor(Model => Model.EmpName)
+    @Html.EditorFor(Model => Model.EmpName)
+    @Html.ValidationMessageFor(Model=> Model.EmpName)
+    <br />
+    <br />
+    @Html.LabelFor(Model => Model.EmpSal)
+    @Html.EditorFor(Model => Model.EmpSal)
+    @Html.ValidationMessageFor(Model=> Model.EmpSal)
+    <br />
+    <input type="submit" value="Register"/>
+}
+
+
+==================================================================================
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using WebApplication30.Models;
+
+namespace WebApplication30.Controllers
+{
+    public class HomeController : Controller
+    {
+        // GET: Home
+        public ActionResult Index()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Index(Employee emp)
+        {
+            return View();
+        }
+    }
+}
