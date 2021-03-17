@@ -1,0 +1,63 @@
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace WebApplication9
+{
+    public class DefaultController : Controller
+    {
+        // GET: Default
+        public ActionResult Index()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Index(int s1,int s2,int s3)
+        {
+            string res = string.Empty;
+            if(s1>35 && s2>35 && s3>35)
+            {
+                res = "You are passed";
+
+            }
+            else
+            {
+                res = "You are Failed";
+            }
+            ViewData["sol"] = res;
+            return View();
+        }
+    }
+}
+=================================================================================================================================================
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@using (Html.BeginForm()){
+
+
+<br />
+<p>Subject 1 Marks : </p>@Html.TextBox("s1")
+<br />
+<p>Subject 2 Marks :</p>@Html.TextBox("s2")
+<br />
+<p>Subject 3 Marks : </p>@Html.TextBox("s3")
+<br/>
+<input type="submit" value="CheckResult"/>
+    <br/>
+    @ViewData["sol"]
+}
+
+
+
+
+
+
+
+
