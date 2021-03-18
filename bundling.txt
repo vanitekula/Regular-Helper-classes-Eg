@@ -1,0 +1,87 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
+using System.Web.Optimization;
+using WebApplication34.App_Start;
+
+namespace WebApplication34
+{
+    public class MvcApplication : System.Web.HttpApplication
+    {
+        protected void Application_Start()
+        {
+            AreaRegistration.RegisterAllAreas();
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundle(BundleTable.Bundles);
+        }
+    }
+}
+========================================================================================
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace WebApplication34.Controllers
+{
+    public class HomeController : Controller
+    {
+        // GET: Home
+        public ActionResult Index()
+        {
+            return View();
+        }
+    }
+}
+========================================================================================
+h2 {
+    background-color: blue;
+    color: white;
+    text-align: center;
+}
+=======================================================================================
+p {
+    text-align: justify;
+    background-color: darkseagreen;
+}
+=========================================================================================
+this should be created inside App_Start
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Optimization;
+
+namespace WebApplication34.App_Start
+{
+    public class BundleConfig
+    {
+        public static void RegisterBundle(BundleCollection bundles)
+        {
+            bundles.Add(new StyleBundle("~/Styles/Effects").Include("~/Styles/headings.css", "~/Styles/paragraphs.css"));
+        }
+    }
+}
+=====================================================================================================
+@using System.Web.Optimization;
+@Styles.Render("~/Styles/Effects");
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<p> My name is Vani Tekula </p>
+
+
+========================================================================================================
+
+
+
+
+
+
+
